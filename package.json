@@ -1,0 +1,19 @@
+{
+  "name": "starter-bakery-inventory-manager",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm -prefix frontend run build",
+    "backend-install": "cd ./backend && npm install && cd ..",
+    "frontend-install": "cd ./frontend && npm install && cd ..",
+    "start": "npx concurrently 'npm run start:backend' 'npm run start:frontend'",
+    "start:backend": "npm --prefix ./backend start",
+    "start:frontend": "npm --prefix ./frontend start",
+    "start:dev": "npx concurrently \"npm run start:dev --prefix ./backend\" \"npm start --prefix ./frontend\" ",
+    "test": "npm test --prefix ./backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
