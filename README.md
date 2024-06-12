@@ -9,7 +9,8 @@ There are no user stories for logging: it is expected that you will add logging 
 <!-- TOC depthfrom:2 depthto:3 -->
 
 - [Getting started](#getting-started)
-  - [Running your application](#running-your-application)
+  - [Installing and running your application](#installing-and-running-your-application)
+  - [Database setup](#database-setup)
   - [Running the tests](#running-the-tests)
 - [Existing files](#existing-files)
   - [The root directory](#the-root-directory)
@@ -42,9 +43,9 @@ There are no user stories for logging: it is expected that you will add logging 
 
 To get started on this project, fork and clone this repository. Keep in mind that you _will not be making a pull request to this repository._
 
-### Running your application
+### Installing and running your application
 
-Run the following commands from your command line. Make sure you are in the root directory before running the commands.
+To install, run the following commands from your command line. Make sure you are in the root directory before running the commands.
 
 ```
 npm run backend-install
@@ -54,6 +55,14 @@ npm run frontend-install
 To start the project, you have a few different options. View the `package.json` in the root directory to see the scripts available to you.
 
 For development purposes, you will likely want to open up a terminal tab, navigate to the `backend/` directory, and run `npm run dev`. In a different terminal tab you will want to navigate to the `frontend/` directory and run `npm start`.
+
+### Database setup
+
+Set up a new PostgreSQL database instance by following the instructions in the "PostgreSQL: Creating & Installing Databases" lesson.
+
+Run `cp ./back-end/.env.sample ./back-end/.env` and update the `./back-end/.env` file with the connection URLs to your PostgreSQL database instance.
+
+Navigate to the `backend` folder, where the `knexfile.js` file is located, and run the `npx knex` commands from there.
 
 ### Running the tests
 
@@ -116,7 +125,7 @@ next({ status: 500, message: "Your error message" });
 
 #### `test/` directory
 
-The only automated tests for this project are within this directory. Keep in mind that to run your tests, you must create a test database and provide its URL within your `.env` file.
+The only automated tests for this project are within this directory.
 
 ### Frontend directory
 
@@ -162,7 +171,40 @@ You will need some way to store _at least_ the IDs of shows from the [TVMaze API
 
 #### Seed data
 
-Your seed data should include at least 2 accounts. Each accounts should have at least 1 list that should be populated with at least 3 shows.
+Your seed data should meet the following requirements:
+
+1. Accounts: Include at least 2 accounts.
+
+2. Lists: Each account should have at least 1 list. Each list should have at least 3 shows.
+
+##### Compatibility Note
+
+The tests utilize an in-memory SQLite database, while the development environment uses a PostgreSQL database. Ensure your seed file can handle both PostgreSQL (development) and SQLite (test) databases. The code should detect the database type and apply the appropriate commands for truncating tables and resetting primary keys.
+
+##### Example Seed File
+
+Below is an example seed file that meets the above requirements and handles both PostgreSQL and SQLite databases:
+
+```js
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.seed = async function (knex) {
+  const isPostgres = knex.client.config.client === "pg";
+
+  if (isPostgres) {
+    // PostgreSQL specific: TRUNCATE TABLE with RESTART IDENTITY
+    await knex.raw("TRUNCATE TABLE accounts RESTART IDENTITY CASCADE");
+  } else {
+    // SQLite specific: DELETE all rows and reset the primary key sequence
+    await knex("accounts").del();
+    await knex.raw("DELETE FROM sqlite_sequence WHERE name = ?", ["accounts"]);
+  }
+
+  // ...
+};
+```
 
 ### API routes
 
