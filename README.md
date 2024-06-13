@@ -56,6 +56,8 @@ To start the project, you have a few different options. View the `package.json` 
 
 For development purposes, you will likely want to open up a terminal tab, navigate to the `backend/` directory, and run `npm run dev`. In a different terminal tab you will want to navigate to the `frontend/` directory and run `npm start`.
 
+Alternatively, you can run `npm start` in the `root/` directory which will run the `npm start` commands of both the `backend/` and `frontend/` directory. `npm run start:dev` will do the same, but will run the server in development mode.
+
 ### Database setup
 
 Set up a new PostgreSQL database instance by following the instructions in the "PostgreSQL: Creating & Installing Databases" lesson.
@@ -141,7 +143,7 @@ The following two tables are required. You will also need to figure out some way
 
 #### `accounts` table
 
-Each account represents an individual person using the web application.
+Each account represents an individual using the web application.
 
 > **Note:** This project _does not_ require you to implement authentication as part of its requirements. While you may add authentication at a later point, it is not essential to completing the project.
 
@@ -285,6 +287,7 @@ so that I can add them to a list.
 - All pages should include a search bar in the header where a user can search for shows.
 - Upon searching they should be brought to a page which includes the search term in the URL (e.g., `/shows?q=<search>`).
 - All shows which have a title that matches the search term can be pulled from the [TVMaze API](https://www.tvmaze.com/api) and displayed on the page.
+  - There is a specific endpoint for [searching shows](https://www.tvmaze.com/api#show-search) via the API.
 - Clicking on a show brings the user to the specific page for that show.
 
 ### US-03 - View show
@@ -343,7 +346,7 @@ so that I can keep my list details updated.
 #### Acceptance criteria
 
 - The `/lists/:listId/edit` page should include a form that allows for the given list details to be updated.
-- If the data entered within the form is invalid, an error message should be shown.
+- If the data entered within the form is invalid, an error message should be shown. Each list must have a title and an account.
 - When a list is successfully updated, the user should be taken to that list's individual page.
 
 ### US-08 - Delete a list
