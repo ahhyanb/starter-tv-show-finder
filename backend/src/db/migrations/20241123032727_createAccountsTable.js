@@ -5,11 +5,9 @@
 exports.up = function(knex) {
   return knex.schema.createTable("accounts", (table) => {
     table.increments("account_id").primary();
-    table.text("name").notNullable();
-    table.text("username").notNullable();
+    table.text("name");
+    table.text("username");
   })
-    
-
 };
 
 /**
