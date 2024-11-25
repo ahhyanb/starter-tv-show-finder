@@ -60,7 +60,7 @@ async function update(req, res, next) {
 // Delete an account
 async function destroy(req, res, next) {
   const account = res.locals.account; // Fetched by `accountIdExists`
-  await service.delete(account.id); // Replace `id` with `account_id` if necessary
+  await service.delete(account.id); 
   res.status(200).json({ data: account });
 }
 

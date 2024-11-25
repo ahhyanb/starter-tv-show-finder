@@ -10,6 +10,7 @@ const notFound = require("./errors/notFound");
 const app = express();
 
 const accountsRouter = require("../src/accounts/accounts.router");
+const listsRouter = require("../src/lists/lists.router");
 
 if (process.env.LOG_LEVEL === "info") {
   app.use(require("morgan")("dev"));
@@ -19,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/accounts", accountsRouter);
+app.use("/lists", listsRouter);
 
 // Add in your routers here.
 
