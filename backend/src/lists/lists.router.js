@@ -8,4 +8,8 @@ router.route("/")
     .post(controller.create)
     .all(methodNotAllowed);
 
+router.route("/:listId")
+    .get(controller.readId)
+    .all(methodNotAllowed);    
+
 module.exports = router;

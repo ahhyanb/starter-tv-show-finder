@@ -9,8 +9,7 @@ exports.up = function(knex) {
             .references("id")
             .inTable("accounts")
             .onDelete("CASCADE");
-        table.text("title").notNullable();
-        
+        table.text("title").notNullable();    
     })
   
 };

@@ -43,10 +43,8 @@ function list() {
   
         return lists;
       });
-  }
+}
   
-
-
 function create(newList) {
     return knex("lists")
         .insert(newList)
@@ -54,9 +52,17 @@ function create(newList) {
         .then((row) => row[0]) // only send the first row
 }
 
+function readId(listId){
+    return knex("list")
+        .select("*")
+        .where({ id: "listId" });
+}
+
+
 
 
 module.exports = { 
     list,
     create, 
+    readId,
 }

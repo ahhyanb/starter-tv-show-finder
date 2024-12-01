@@ -1,3 +1,11 @@
+/* 
+>>| `GET`       | `/lists`               | Returns all lists within the database.                           |
+| `GET`       | `/lists/:listId`       | Returns a single list with the matching ID.                      |
+>>| `POST`      | `/lists`               | Should create a new list and return that list with its ID.       |
+| `PUT`       | `/lists/:listId`       | Updates an list based on the                                     |
+| `DELETE`    | `/lists/:listId`       | Should delete the specified list.                                |
+*/
+
 const service = require("./lists.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
@@ -30,7 +38,14 @@ async function list(req, res, next) {
   res.json({ data: data });
 }
 
+async function readId(req, res, next) {
+    const { listId } = req.params;
+    const listById = await service.readId(listId);
+    res.json({ data: listById });
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [validList, asyncErrorBoundary(create)],
+  readId: asyncErrorBoundary(readId),
 };
