@@ -11,8 +11,6 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 async function validList(req, res, next) {
   const newList = req.body.data;
- 
-
   if (!newList) {
     return next({ status: 400, message: "List data is required." });
   }
@@ -22,7 +20,7 @@ async function validList(req, res, next) {
   if (!newList.account_id) {
     return next({ status: 400, message: "List account_id is required." });
   }
-  console.log("Validation Passed:", newList);
+  
   res.locals.list = newList;
   return next();
 }
@@ -39,13 +37,28 @@ async function list(req, res, next) {
 }
 
 async function readId(req, res, next) {
-    const { listId } = req.params;
-    const listById = await service.readId(listId);
-    res.json({ data: listById });
+  const list = res.locals.list;
+  console.log("List passed to readId controller:", list); // Debugging output
+  res.status(200).json({ data: list });
 }
+
+async function validateListId(req, res, next) {
+  const { listId } = req.params;
+  const listById = await service.readId(listId);
+
+  console.log("List fetched in validateListId:", listById); // Debugging output
+
+  if (!listById) {
+    return next({ status: 404, message: `List ID: ${listId}, was not found.` });
+  }
+
+  res.locals.list = listById;
+  return next();
+}
+
 
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [validList, asyncErrorBoundary(create)],
-  readId: asyncErrorBoundary(readId),
+  readId: [validateListId, asyncErrorBoundary(readId)],
 };

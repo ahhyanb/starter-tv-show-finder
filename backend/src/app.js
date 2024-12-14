@@ -19,10 +19,11 @@ if (process.env.LOG_LEVEL === "info") {
 app.use(cors());
 app.use(express.json());
 
+// Add in your routers here.
 app.use("/accounts", accountsRouter);
 app.use("/lists", listsRouter);
 
-// Add in your routers here.
+
 
 app.use(notFound);
 app.use(errorHandler);

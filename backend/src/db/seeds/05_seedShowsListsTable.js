@@ -3,26 +3,29 @@
  * @returns { Promise<void> }
  */
 exports.seed = async function (knex) {
-  // Insert seed data
   await knex("shows_lists").insert([
-    // User One's Favorites
+    // Liam's Watchlist
     { list_id: 1, show_id: 1 },
     { list_id: 1, show_id: 2 },
-    { list_id: 1, show_id: 3 },
 
-    // User Two's Watch Later
+    // Liam's Favorites
+    { list_id: 2, show_id: 3 },
     { list_id: 2, show_id: 4 },
-    { list_id: 2, show_id: 5 },
-    { list_id: 2, show_id: 6 },
 
-    // User Three's Completed
-    { list_id: 3, show_id: 7 },
-    { list_id: 3, show_id: 8 },
-    { list_id: 3, show_id: 9 },
+    // Rhiella's Comedy Shows
+    { list_id: 3, show_id: 5 },
+    { list_id: 3, show_id: 6 },
 
-    // Additional shows for variety
-    { list_id: 1, show_id: 10 },
-    { list_id: 2, show_id: 11 },
-    { list_id: 3, show_id: 12 },
+    // Rhiella's Sci-Fi Picks
+    { list_id: 4, show_id: 7 },
+    { list_id: 4, show_id: 8 },
+
+    // Kian's Drama Collection
+    { list_id: 5, show_id: 9 },
+    { list_id: 5, show_id: 10 },
+
+    // Kian's Sci-Fi Picks (6th list)
+    { list_id: 6, show_id: 11 },
+    { list_id: 6, show_id: 12 },
   ]);
 };
