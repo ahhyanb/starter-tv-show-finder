@@ -9,6 +9,6 @@ exports.seed = async function (knex) {
     { id: 3, account_id: 2, title: "Rhiella's Comedy Shows" },
     { id: 4, account_id: 2, title: "Rhiella's Sci-Fi Picks" },
     { id: 5, account_id: 3, title: "Kian's Drama Collection" },
-    { id: 6, account_id: 3, title: "Kian's Sci-Fi Picks" }, // Add the 6th list
+    { id: 6, account_id: 3, title: "Kian's Sci-Fi Picks" },
   ]);
 };

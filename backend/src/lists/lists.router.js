@@ -1,15 +1,18 @@
-const express = require("express");
-const router = express.Router();
-const methodNotAllowed = require("../errors/methodNotAllowed");
+const router = require("express").Router();
 const controller = require("./lists.controller");
+const methodNotAllowed = require("../errors/methodNotAllowed");
 
-router.route("/")
-    .get(controller.list)
-    .post(controller.create)
-    .all(methodNotAllowed);
+router
+  .route("/")
+  .get(controller.list)
+  .post(controller.create)
+  .all(methodNotAllowed);
 
-router.route("/:listId")
-    .get(controller.readId)
-    .all(methodNotAllowed);    
+router
+  .route("/:listId")
+  .get(controller.readId)
+  .put(controller.update)
+  .delete(controller.destroy)
+  .all(methodNotAllowed);
 
 module.exports = router;

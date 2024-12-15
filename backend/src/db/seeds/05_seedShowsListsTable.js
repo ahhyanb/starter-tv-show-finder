@@ -24,7 +24,7 @@ exports.seed = async function (knex) {
     { list_id: 5, show_id: 9 },
     { list_id: 5, show_id: 10 },
 
-    // Kian's Sci-Fi Picks (6th list)
+    // Kian's Sci-Fi Picks
     { list_id: 6, show_id: 11 },
     { list_id: 6, show_id: 12 },
   ]);
