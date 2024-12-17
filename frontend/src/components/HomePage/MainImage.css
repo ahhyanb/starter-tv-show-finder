@@ -1,0 +1,25 @@
+  
+  .main-image-container {
+    text-align: center;
+    position: relative; /* Enables positioning for text overlay */
+  }
+  
+  .main-image {
+    max-width: 80%; /* Scales image to fit nicely on most screens */
+    height: auto;
+    border-radius: 10px; /* Adds subtle rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Adds depth to the image */
+  }
+  
+  .overlay-text {
+    position: absolute; /* Positions text over the image */
+    top: 20%; /* Adjusts the vertical position */
+    left: 50%; /* Centers the text horizontally */
+    transform: translate(-50%, -90%); /* Centers the text precisely */
+    color: white;
+    font-size: 3.3rem; /* Adjusts text size */
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds depth to the text */
+  }
+  

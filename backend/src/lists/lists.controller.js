@@ -15,6 +15,8 @@ async function validateListId(req, res, next) {
 
 async function validateListData(req, res, next) {
   const { data = {} } = req.body;
+  
+   console.log(req.body);
 
   if (!data.title) {
     return next({ status: 400, message: "List title is required." });

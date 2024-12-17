@@ -15,7 +15,7 @@ function fetchListData(filter = {}) {
     )
     .where(filter) // Ensure this applies correctly
     .then((rows) => {
-      console.log("Rows fetched in fetchListData:", rows); // Debug logging
+      // console.log("Rows fetched in fetchListData:", rows); // Debug logging
       return rows;
     });
 }
@@ -37,7 +37,7 @@ function processRowsToSingleList(rows) {
       })),
   };
 
-  console.log("Processed List:", list);
+  // console.log("Processed List:", list);
 
   return list;
 }
@@ -83,7 +83,7 @@ function create(newList) {
 
 async function update(listId, updatedList) {
   await knex("lists").where({ id: listId }).update(updatedList); // Perform the update
-  console.log("Updated List:", updatedList);
+  // console.log("Updated List:", updatedList);
   return readId(listId); // Fetch the updated list with associated shows
 }
 

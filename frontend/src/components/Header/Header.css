@@ -1,0 +1,114 @@
+.header {
+  display: flex;
+  flex-direction: column; /* Stacks the header elements vertically */
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #1f1f1f;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the content horizontally */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 5px;
+}
+
+.logo {
+  width: 300px;
+  height: 150px;
+  object-fit: contain;
+  /* background-color: white; */
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav {
+  margin-bottom: 15px; /* Adds spacing between nav and search bar */
+}
+
+.nav-list {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #f39c12; /* Vibrant hover effect */
+}
+
+.search-container {
+  display: flex;
+  gap: 8px; /* Reduced spacing for a smaller appearance */
+  margin-top: 10px;
+  width: 50%; /* Adjust width to make it smaller */
+  justify-content: center;
+}
+
+.search-bar {
+  width: 70%; /* Reduced the width for a smaller size */
+  padding: 8px; /* Smaller padding for a compact look */
+  font-size: 0.9rem; /* Reduced font size */
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #2a2a2a;
+  color: white;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar::placeholder {
+  color: #aaa;
+}
+
+.search-bar:focus {
+  border-color: #f39c12;
+}
+
+.search-button {
+  padding: 8px 16px; /* Smaller padding for the button */
+  font-size: 0.9rem; /* Reduced font size */
+  color: white;
+  background-color: #f39c12;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-button:hover {
+  background-color: #d37f10;
+  transform: scale(1.05);
+}
