@@ -17,6 +17,9 @@ function App() {
         <Route path="/lists/:listId" element={<ShowList />} />
         <Route path="/lists/new" element={<CreateList />} />
         <Route path="/lists/:listId/edit" element={<EditList />} />
+
+        {/* <Route path="/shows" element={<ShowsSearch />} /> */}
+
       </Routes>
     </>
   );
