@@ -45,6 +45,9 @@ function Header() {
                         ? result.show.summary.replace(/<[^>]*>/g, "")
                         : "No summary available."}
                     </p>
+                    <button>
+                      <a href={`/shows/${result.show.id}`}>View Details</a>
+                    </button>
                   </li>
                 ))}
               </ul>
