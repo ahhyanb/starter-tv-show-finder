@@ -33,9 +33,35 @@ function AccountDetails() {
     }));
   };
 
+  // Handle account deletion
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this account? This action is irreversible.")) {
+      try {
+        await axios.delete(`http://localhost:5001/accounts/${accountId}`);
+        alert("Account deleted successfully.");
+        navigate("/accounts"); // Redirect to accounts index after deletion
+      } catch (error) {
+        console.error("Error deleting account:", error);
+        alert("Failed to delete the account. Please try again.");
+      }
+    }
+  };
+
+  // Navigate to the edit account page
+  const handleEdit = () => {
+    navigate(`/accounts/${accountId}/edit`);
+  };
+
   return (
-    <>
-      <h1>{accountDetails.title || "Account Details"}</h1>
+    <div>
+      <h1>{accountDetails.name || "Account Details"}</h1>
+      <p>
+        <strong>Username:</strong> {accountDetails.username}
+      </p>
+      <div className="action-buttons">
+        <button onClick={handleEdit}>Edit Account</button>
+        <button onClick={handleDelete}>Delete Account</button>
+      </div>
 
       <h2>Shows</h2>
       {accountShows.length === 0 ? (
@@ -67,7 +93,7 @@ function AccountDetails() {
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

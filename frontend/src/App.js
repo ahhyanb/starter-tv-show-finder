@@ -10,6 +10,7 @@ import ListAccounts from "./components/accounts/ListAccounts";
 import AccountDetails from "./components/accounts/AccountDetails";
 import Header from "./components/Header/Header";
 import CreateAccount from "./components/accounts/CreateAccount";
+import CompareList from "./components/Compare/CompareList";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Route path="/accounts" element={<ListAccounts />} />
         <Route path="/accounts/:accountId" element={<AccountDetails />} />
         <Route path="/accounts/new" element={<CreateAccount />} />
+
+        <Route path="lists/compare" element={<CompareList />} />
 
       </Routes>
     </>

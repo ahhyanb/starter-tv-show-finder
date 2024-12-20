@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CreateAccount() {
   const [newAccount, setNewAccount] = useState(null); // Changed to `null` initially
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+  const navigate = useNavigate();
 
   const handleNameChange = (event) => setName(event.target.value);
   const handleUsernameChange = (event) => setUsername(event.target.value);
@@ -18,11 +20,17 @@ function CreateAccount() {
       const inputs = { data: { username, name } };
       const response = await axios.post(`${BASE_URL}/accounts`, inputs);
       setNewAccount(response.data.data); // Save the newly created account
-      alert("Account created successfully!");
+
+      alert("Account created successfully!");  
+
+      const accountId = response.data.data.id;
+      navigate(`/accounts/${accountId}`);
+
     } catch (error) {
       console.error("There was a problem creating the new account.", error);
       alert("Failed to create account. Please try again.");
     }
+  
   };
 
   return (
