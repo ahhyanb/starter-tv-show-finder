@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Header.css";
 import SearchBar from "../SearchBar/SearchBar";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [searchResults, setSearchResults] = useState([]); // State for results
@@ -16,9 +17,12 @@ function Header() {
     <>
       <header className="header">
         <div className="container">
-          <div className="logo-container">
+        <div className="logo-container">
+          <Link to="/">
             <img src="/logo2.png" alt="TV Show Finder Logo" className="logo" />
-          </div>
+          </Link>
+        </div>
+
           <nav className="nav">
             <ul className="nav-list">
               <li className="nav-item"><a href="/" className="link">Home</a></li>
