@@ -7,12 +7,16 @@ import EditList from "./components/Lists/EditList";
 import ListSection from "./components/Lists/ListSection";
 import ShowDetails from "./components/ShowDetails/ShowDetails";
 import ListAccounts from "./components/accounts/ListAccounts";
+import AccountDetails from "./components/accounts/AccountDetails";
 import Header from "./components/Header/Header";
+import CreateAccount from "./components/accounts/CreateAccount";
 
 function App() {
   return (
     <>
+
       <Header />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lists" element={<ListSection />} />
@@ -22,8 +26,8 @@ function App() {
         <Route path="/shows/:showId" element={<ShowDetails />} />
 
         <Route path="/accounts" element={<ListAccounts />} />
-
-        {/* <Route path="/shows" element={<ShowsSearch />} /> */}
+        <Route path="/accounts/:accountId" element={<AccountDetails />} />
+        <Route path="/accounts/new" element={<CreateAccount />} />
 
       </Routes>
     </>

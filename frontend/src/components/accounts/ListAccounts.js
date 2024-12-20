@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function ListAccounts() {
   const [accounts, setAccounts] = useState([]); // Initialize as an empty array
+
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const BASE_URL = "http://localhost:5001";
@@ -29,7 +33,9 @@ function ListAccounts() {
             <li key={account.id}>
               <h3>{account.name}</h3>
               <p>{account.username}</p>
-              <button>View List</button>
+              <button onClick={() => navigate(`/accounts/${account.id}`)}
+              
+                >View List</button>
             </li>
           ))
         ) : (
