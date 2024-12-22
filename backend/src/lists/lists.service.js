@@ -88,10 +88,24 @@ async function update(listId, updatedList) {
 }
 
 
-
 function destroy(listId) {
   return knex("lists").where({ id: listId }).del();
 }
+
+function addShowToList(listId, showId) {
+  return knex("shows_lists")
+    .insert({ list_id: listId, show_id: showId })
+    .returning("*")
+    .then((rows) => rows[0]);
+}
+
+
+function isShowInList(listId, showId) {
+  return knex("shows_lists")
+    .where({ list_id: listId, show_id: showId })
+    .first(); // Return the existing list if it exists 
+}
+
 
 module.exports = {
   list,
@@ -99,4 +113,6 @@ module.exports = {
   readId,
   update,
   destroy,
+  addShowToList,
+  isShowInList
 };

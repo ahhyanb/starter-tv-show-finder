@@ -7,6 +7,8 @@ function ShowDetails() {
   const { showId } = useParams();
   const navigate = useNavigate();
   const [showDetails, setShowDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -15,22 +17,25 @@ function ShowDetails() {
         const response = await axios.get(`${BASE_URL}shows/${showId}`);
         setShowDetails(response.data);
       } catch (error) {
-        console.error("There was an error fetching the show details.", error);
+        setError("Failed to fetch show details.");
+        console.error(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDetails();
   }, [showId]);
 
-  if (!showDetails) return <p>Loading show details...</p>;
-
   const handleBack = () => {
     navigate(-1); // Navigate back to the previous page
   };
 
-  const handleAddToList = () => {
-    navigate(`/lists/${showId}/new`); // Navigate to the Add to List page
-  };
+  const handleAddToList = () => navigate(`/lists/${showId}/new`);
+
+
+  if (loading) return <p>Loading show details...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="show-details">
@@ -45,7 +50,7 @@ function ShowDetails() {
       )}
 
       {/* Summary */}
-      <p>{showDetails.summary.replace(/<[^>]*>/g, "")}</p>
+      <p>{showDetails.summary?.replace(/<[^>]*>/g, "") || "No summary available."}</p>
 
       {/* Additional Details */}
       <ul>

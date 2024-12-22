@@ -12,6 +12,7 @@ import Header from "./components/Header/Header";
 import CreateAccount from "./components/accounts/CreateAccount";
 import CompareList from "./components/Compare/CompareList";
 import SearchResults from "./components/Search/SearchResults";
+import AddToList from "./components/Lists/AddToList";
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         <Route path="/accounts" element={<ListAccounts />} />
         <Route path="/accounts/:accountId" element={<AccountDetails />} />
         <Route path="/accounts/new" element={<CreateAccount />} />
+
+        <Route path="/lists/:showId/new" element={<AddToList />} />
+
 
         <Route path="/search" element={<SearchResults />} />
 

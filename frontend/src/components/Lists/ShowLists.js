@@ -9,7 +9,8 @@ function ShowList() {
   const [list, setList] = useState(null);
   const [shows, setShows] = useState([]); // State for associated shows
   const [error, setError] = useState(null);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isDeletingList, setIsDeletingList] = useState(false);
+  const [deletingShowId, setDeletingShowId] = useState(null);
 
   useEffect(() => {
     async function fetchListAndShows() {
@@ -25,9 +26,9 @@ function ShowList() {
     fetchListAndShows();
   }, [listId]);
 
-  const handleDelete = async () => {
+  const handleDeleteList = async () => {
     if (window.confirm("Are you sure you want to delete this list?")) {
-      setIsDeleting(true);
+      setIsDeletingList(true);
       try {
         await axios.delete(`http://localhost:5001/lists/${listId}`);
         alert("List deleted successfully.");
@@ -36,7 +37,23 @@ function ShowList() {
         console.error("Error deleting the list:", err);
         alert("Failed to delete the list. Please try again.");
       } finally {
-        setIsDeleting(false);
+        setIsDeletingList(false);
+      }
+    }
+  };
+
+  const handleDeleteShow = async (showId) => {
+    if (window.confirm("Are you sure you want to remove this show from the list?")) {
+      setDeletingShowId(showId);
+      try {
+        await axios.delete(`http://localhost:5001/lists/${listId}/shows/${showId}`);
+        setShows((prevShows) => prevShows.filter((show) => show.id !== showId)); // Remove show from local state
+        alert("Show removed from the list.");
+      } catch (err) {
+        console.error("Error removing the show:", err);
+        alert("Failed to remove the show. Please try again.");
+      } finally {
+        setDeletingShowId(null);
       }
     }
   };
@@ -50,11 +67,8 @@ function ShowList() {
       <p>List ID: {list.id}</p>
 
       <div className="action-buttons">
-        <Link to={`/lists/${listId}/edit`}>
-          <button>Edit List</button>
-        </Link>
-        <button onClick={handleDelete} disabled={isDeleting}>
-          {isDeleting ? "Deleting..." : "Delete List"}
+        <button onClick={handleDeleteList} disabled={isDeletingList}>
+          {isDeletingList ? "Deleting List..." : "Delete List"}
         </button>
       </div>
 
@@ -70,6 +84,13 @@ function ShowList() {
               <p>
                 <strong>Summary:</strong> {show.summary}
               </p>
+              <button
+                onClick={() => handleDeleteShow(show.id)}
+                disabled={deletingShowId === show.id}
+                style={{ backgroundColor: deletingShowId === show.id ? "grey" : "#e74c3c" }}
+              >
+                {deletingShowId === show.id ? "Removing..." : "Remove Show"}
+              </button>
             </li>
           ))}
         </ul>

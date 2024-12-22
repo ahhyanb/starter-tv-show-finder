@@ -15,7 +15,7 @@ async function validateListId(req, res, next) {
 
 async function validateListData(req, res, next) {
   const { data = {} } = req.body;
-  
+
    console.log(req.body);
 
   if (!data.title) {
@@ -62,6 +62,48 @@ async function destroy(req, res) {
   }
 }
 
+async function addShow(req, res, next) {
+  const { listId } = req.params; // Extract listId from URL
+  const { data } = req.body; // Extract data from the request body
+  
+  // Check if data is nested improperly
+  const showId = data?.showId || req.body?.data?.showId; // Handle potential nesting
+
+  if (!showId) {
+    return next({ status: 400, message: "Show ID is required." });
+  }
+
+  console.log("List ID:", listId, "Show ID:", showId); // Debugging log
+
+  // Check if the show already exists in the list
+  const existingRelation = await service.isShowInList(listId, showId);
+  if (existingRelation) {
+    return next({ status: 400, message: "This show is already in the list." });
+  }
+
+  // Add the show to the list
+  const addedShow = await service.addShowToList(listId, showId);
+  res.status(200).json({ data: addedShow });
+}
+
+async function removeShow(req, res, next) {
+  const { listId, showId } = req.params;
+
+  try {
+    // Check if the show exists in the list
+    const existingRelation = await service.isShowInList(listId, showId);
+    if (!existingRelation) {
+      return next({ status: 404, message: `Show with ID ${showId} not found in List ID ${listId}.` });
+    }
+
+    // Remove the show from the list
+    await service.removeShowFromList(listId, showId);
+
+    res.status(204).send(); // Return 204 No Content on successful deletion
+  } catch (error) {
+    next(error);
+  }
+}
 
 module.exports = {
   list: asyncErrorBoundary(list),
@@ -69,4 +111,6 @@ module.exports = {
   create: [validateListData, asyncErrorBoundary(create)],
   update: [validateListId, validateListData, asyncErrorBoundary(update)],
   destroy: [validateListId, asyncErrorBoundary(destroy)],
+  addShow: asyncErrorBoundary(addShow),
+  removeShow: asyncErrorBoundary(removeShow),
 };
