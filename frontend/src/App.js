@@ -13,6 +13,7 @@ import CreateAccount from "./components/accounts/CreateAccount";
 import CompareList from "./components/Compare/CompareList";
 import SearchResults from "./components/Search/SearchResults";
 import AddToList from "./components/Lists/AddToList";
+import ShowInTheList from "./components/Lists/ShowInTheList";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/lists/new" element={<CreateList />} />
         <Route path="/lists/:listId/edit" element={<EditList />} />
         <Route path="/lists/compare" element={<CompareList />} />
+        <Route path="/lists/:listId/shows/:showId" element={<ShowInTheList />} />
 
         {/* Show Details */}
         <Route path="/shows/:showId" element={<ShowDetails />} />

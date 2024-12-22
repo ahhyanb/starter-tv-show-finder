@@ -106,6 +106,13 @@ function isShowInList(listId, showId) {
     .first(); // Return the existing list if it exists 
 }
 
+function removeShowFromList(listId, showId) {
+  return knex("shows_lists")
+    .del({ list_id: listId, show_id: showId }) // Matches the list and show relationship
+  
+}
+
+
 
 module.exports = {
   list,
@@ -114,5 +121,6 @@ module.exports = {
   update,
   destroy,
   addShowToList,
-  isShowInList
+  isShowInList,
+  removeShowFromList,
 };

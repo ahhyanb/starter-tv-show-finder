@@ -1,6 +1,24 @@
 const service = require("./lists.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
+async function removeShow(req, res, next) {
+  const { listId, showId } = req.params; // Extract listId and showId
+  console.log(`Received listId: ${listId}, showId: ${showId}`); // Debugging log
+
+  try {
+    const result = await service.removeShowFromList(listId, showId);
+
+    if (result) {
+      res.status(204).end(); // Success: No content
+    } else {
+      next({ status: 404, message: `Show ID ${showId} not found in List ID ${listId}` });
+    }
+  } catch (error) {
+    next(error); // Handle unexpected errors
+  }
+}
+
+
 async function validateListId(req, res, next) {
   const { listId } = req.params;
   const list = await service.readId(listId);
@@ -86,24 +104,8 @@ async function addShow(req, res, next) {
   res.status(200).json({ data: addedShow });
 }
 
-async function removeShow(req, res, next) {
-  const { listId, showId } = req.params;
 
-  try {
-    // Check if the show exists in the list
-    const existingRelation = await service.isShowInList(listId, showId);
-    if (!existingRelation) {
-      return next({ status: 404, message: `Show with ID ${showId} not found in List ID ${listId}.` });
-    }
 
-    // Remove the show from the list
-    await service.removeShowFromList(listId, showId);
-
-    res.status(204).send(); // Return 204 No Content on successful deletion
-  } catch (error) {
-    next(error);
-  }
-}
 
 module.exports = {
   list: asyncErrorBoundary(list),
