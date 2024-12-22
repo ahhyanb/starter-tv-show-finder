@@ -23,8 +23,6 @@ app.use(express.json());
 app.use("/accounts", accountsRouter);
 app.use("/lists", listsRouter);
 
-
-
 app.use(notFound);
 app.use(errorHandler);
 

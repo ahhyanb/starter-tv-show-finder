@@ -1,67 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Header.css";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../Search/SearchBar";
 import { Link } from "react-router-dom";
 
 function Header() {
-  const [searchResults, setSearchResults] = useState([]); // State for results
-  const [hasSearched, setHasSearched] = useState(false);  // State to track if a search was made
-
-  // Update results and mark that a search has been performed
-  const handleSearchResults = (results) => {
-    setSearchResults(results);
-    setHasSearched(true);
-  };
-
   return (
-    <>
-      <header className="header">
-        <div className="container">
+    <header className="header">
+      <div className="container">
         <div className="logo-container">
           <Link to="/">
             <img src="/logo2.png" alt="TV Show Finder Logo" className="logo" />
           </Link>
         </div>
 
-          <nav className="nav">
-            <ul className="nav-list">
-              <li className="nav-item"><a href="/" className="link">Home</a></li>
-              <li className="nav-item"><a href="/shows" className="link">Shows</a></li>
-              <li className="nav-item"><a href="/about" className="link">About</a></li>
-            </ul>
-          </nav>
+        <nav className="nav">
+          <ul className="nav-list">
+            <li className="nav-item">
+              <Link to="/" className="link">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/shows" className="link">Shows</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/about" className="link">About</Link>
+            </li>
+          </ul>
+        </nav>
 
-          {/* SearchBar Component */}
-          <SearchBar onSearchResults={handleSearchResults} />
-        </div>
-      </header>
-
-      <main>
-        <div className="search-results">
-          {hasSearched ? (
-            searchResults.length > 0 ? (
-              <ul>
-                {searchResults.map((result) => (
-                  <li key={result.show.id}>
-                    <strong>{result.show.name}</strong>
-                    <p>
-                      {result.show.summary
-                        ? result.show.summary.replace(/<[^>]*>/g, "")
-                        : "No summary available."}
-                    </p>
-                    <button>
-                      <a href={`/shows/${result.show.id}`}>View Details</a>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No results found.</p>
-            )
-          ) : null} {/* Don't show anything until a search is made */}
-        </div>
-      </main>
-    </>
+        {/* SearchBar Component */}
+        <SearchBar />
+      </div>
+    </header>
   );
 }
 

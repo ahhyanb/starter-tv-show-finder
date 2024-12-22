@@ -1,0 +1,26 @@
+/* Search Results Styles */
+.search-results {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: white;
+  }
+  
+  .search-results h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-results ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .search-results li {
+    background-color: #2a2a2a;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  

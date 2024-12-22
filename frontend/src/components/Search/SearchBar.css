@@ -1,0 +1,80 @@
+/* SearchBar Container */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 600px; /* Restrict the width to fit well on most screens */
+    background-color: #2a2a2a; /* Matches the card background */
+    border-radius: 8px; /* Soft rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Adds subtle depth */
+  }
+  
+  /* Input Field */
+  .search-bar {
+    flex: 1; /* Takes up as much space as available */
+    padding: 10px;
+    font-size: 1rem;
+    border: none; /* Removes the default border */
+    border-radius: 8px 0 0 8px; /* Rounded corners on the left */
+    outline: none; /* Removes the blue outline */
+    background-color: #1f1f1f; /* Matches the overall app background */
+    color: white; /* Makes the text stand out */
+    box-sizing: border-box;
+  }
+  
+  /* Input Placeholder */
+  .search-bar::placeholder {
+    color: #777; /* Subtle gray color for placeholder text */
+    font-style: italic;
+  }
+  
+  /* Search Button */
+  .search-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #f39c12; /* Accent color for the button */
+    border: none; /* Removes default button border */
+    border-radius: 0 8px 8px 0; /* Rounded corners on the right */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Button Hover Effect */
+  .search-button:hover {
+    background-color: #e67e22; /* Slightly darker hover color */
+    transform: scale(1.05); /* Slightly enlarges the button */
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .search-container {
+      max-width: 90%; /* Adapts to smaller screens */
+    }
+  
+    .search-bar {
+      font-size: 0.9rem; /* Slightly smaller text for input */
+    }
+  
+    .search-button {
+      font-size: 0.9rem; /* Adjust button size */
+    }
+  }
+  
+  /* Search Button Loading State */
+.search-button:disabled {
+    background-color: #bdc3c7; /* Gray background for disabled state */
+    cursor: not-allowed; /* Changes cursor to indicate it's disabled */
+  }
+  
+  /* Error Message Styling */
+  .error-message {
+    color: #e74c3c; /* Red color for error */
+    font-size: 0.9rem;
+    margin-top: 5px;
+    text-align: center;
+  }
+  

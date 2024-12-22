@@ -20,19 +20,20 @@ function ListSection() {
 
   return (
     <div>
-      <h1>All TV Show Lists</h1>
-      <ul className="list-section">
-        {lists.map((list) => (
-          <li key={list.id} className="card">
-            <h3>{list.title}</h3>
-            {/* Add link to navigate to ShowList component */}
-            <Link to={`/lists/${list.id}`}>
-              <button>View List</button>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <h1 className="list-title">All TV Show Lists</h1> {/* Styled Title */}
+    <ul className="list-section">
+      {lists.map((list) => (
+        <li key={list.id} className="card">
+          <h3>{list.title}</h3>
+          {/* Add link to navigate to ShowList component */}
+          <Link to={`/lists/${list.id}`}>
+            <button>View List</button>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+  
   );
 }
 
