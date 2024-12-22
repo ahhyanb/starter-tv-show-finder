@@ -114,5 +114,5 @@ module.exports = {
   update: [validateListId, validateListData, asyncErrorBoundary(update)],
   destroy: [validateListId, asyncErrorBoundary(destroy)],
   addShow: asyncErrorBoundary(addShow),
-  removeShow: asyncErrorBoundary(removeShow),
+  removeShow,
 };

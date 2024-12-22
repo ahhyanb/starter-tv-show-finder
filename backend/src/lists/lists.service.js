@@ -107,9 +107,9 @@ function isShowInList(listId, showId) {
 }
 
 function removeShowFromList(listId, showId) {
-  return knex("shows_lists")
-    .del({ list_id: listId, show_id: showId }) // Matches the list and show relationship
-  
+  return knex("shows_lists") // Adjust to your actual table name
+    .where({ list_id: listId, show_id: showId })
+    .del(); // No need for .returning() unless you want specific values
 }
 
 

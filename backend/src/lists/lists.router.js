@@ -4,9 +4,7 @@ const methodNotAllowed = require("../errors/methodNotAllowed");
 
 router
   .route("/:listId/shows/:showId")
-  .delete((req, res) => {
-    res.json({ message: "Route matched!", params: req.params });
-  })
+  .delete(controller.removeShow)
   .all(methodNotAllowed);
 
 router
