@@ -6,10 +6,19 @@ function list() {
 
 function read(accountId) {
   return knex("accounts")
-    .select("*")
-    .where({ id: accountId })
-    .first();
+    .select("accounts.*")
+    .where({ "accounts.id": accountId })
+    .first()
+    .then(async (account) => {
+      if (!account) return null;
+
+      // Fetch the lists associated with the account
+      const lists = await knex("lists").select("*").where({ account_id: accountId });
+
+      return { ...account, lists }; // Combine account details with associated lists
+    });
 }
+
 
 function create(newAccount) {
   return knex("accounts")

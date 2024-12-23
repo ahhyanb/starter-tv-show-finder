@@ -14,6 +14,8 @@ import CompareList from "./components/Compare/CompareList";
 import SearchResults from "./components/Search/SearchResults";
 import AddToList from "./components/Lists/AddToList";
 import ShowInTheList from "./components/Lists/ShowInTheList";
+import UpdateAccount from "./components/accounts/UpdateAccount";
+
 
 function App() {
   return (
@@ -39,11 +41,10 @@ function App() {
         <Route path="/accounts" element={<ListAccounts />} />
         <Route path="/accounts/:accountId" element={<AccountDetails />} />
         <Route path="/accounts/new" element={<CreateAccount />} />
+        <Route path="/accounts/:accountId/edit" element={<UpdateAccount />} />
 
         <Route path="/lists/:showId/new" element={<AddToList />} />
 
-
-        <Route path="/search" element={<SearchResults />} />
 
         {/* Fallback for undefined routes */}
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />

@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import "./ShowsList.css";
 
 function ShowList() {
-  const { listId } = useParams(); // Extract listId from the URL
-  const navigate = useNavigate(); // For navigation after deletion
-  const [list, setList] = useState(null);
-  const [shows, setShows] = useState([]); // State for associated shows
+  const { listId } = useParams();
+  const navigate = useNavigate();
+  const [list, setList] = useState(null); // List details
+  const [shows, setShows] = useState([]); // Shows in the list
   const [error, setError] = useState(null);
-  const [isDeletingList, setIsDeletingList] = useState(false);
-  const [deletingShowId, setDeletingShowId] = useState(null);
 
   useEffect(() => {
     async function fetchListAndShows() {
       try {
         const response = await axios.get(`http://localhost:5001/lists/${listId}`);
         setList(response.data.data); // Set list details
-        setShows(response.data.data.shows); // Set associated shows
+        setShows(response.data.data.shows || []); // Set associated shows
       } catch (err) {
         console.error("Error fetching the list:", err);
         setError("Failed to fetch the list. Please try again.");
@@ -26,101 +23,35 @@ function ShowList() {
     fetchListAndShows();
   }, [listId]);
 
-  const handleDeleteList = async () => {
-    if (window.confirm("Are you sure you want to delete this list?")) {
-      setIsDeletingList(true);
-      try {
-        await axios.delete(`http://localhost:5001/lists/${listId}`);
-        alert("List deleted successfully.");
-        navigate("/lists"); // Redirect to all lists after deletion
-      } catch (err) {
-        console.error("Error deleting the list:", err);
-        alert("Failed to delete the list. Please try again.");
-      } finally {
-        setIsDeletingList(false);
-      }
-    }
-  };
-
-  const handleDeleteShow = async (showId) => {
-    if (!listId || !showId) {
-      alert("Missing listId or showId.");
-      return;
-    }
-  
-    if (window.confirm("Are you sure you want to remove this show from the list?")) {
-      setDeletingShowId(showId); // Track which show is being deleted
-      
-      try {
-
-        console.log(`Sending DELETE request to /lists/${listId}/shows/${showId}`);
-        await axios.delete(`http://localhost:5001/lists/${listId}/shows/${showId}`);
-        
-        // Update local state to reflect deletion
-        setShows((prevShows) => prevShows.filter((show) => show.id !== showId));
-        alert("Show removed from the list.");
-      } catch (err) {
-        console.error("Error removing the show:", err.response?.data || err.message);
-        alert("Failed to remove the show. Please try again.");
-      } finally {
-        setDeletingShowId(null);
-      }
-    }
-  };
-  
-  
-
-  if (error) return <p>{error}</p>; // Show error if fetch fails
-  if (!list) return <p>Loading...</p>; // Show loading until data is fetched
+  if (error) return <p>{error}</p>;
+  if (!list) return <p>Loading...</p>;
 
   return (
     <div>
-      <h1>{list.title}</h1> {/* List Title */}
-      <p>List ID: {list.id}</p>
-
-      <div className="action-buttons">
-        <button onClick={handleDeleteList} disabled={isDeletingList}>
-          {isDeletingList ? "Deleting List..." : "Delete List"}
-        </button>
-      </div>
+      <h1>{list.title}</h1>
+      <button onClick={() => navigate(`/lists/${listId}/edit`)}>Edit List</button> {/* Navigate to EditList */}
 
       <h2>Shows in this list:</h2>
       {shows.length > 0 ? (
         <ul>
           {shows.map((show) => (
-  <li key={show.id} className="show-card">
-    <h3>{show.name}</h3>
-    <p>
-      <strong>Genre:</strong> {show.genre}
-    </p>
-    <p>
-      <strong>Summary:</strong> {show.summary}
-    </p>
-    {/* Add the Link here */}
-    <Link to={`/lists/${listId}/shows/${show.id}`}
-            state={{ show }}>
-      <button style={{ marginBottom: "10px" }}>View Show</button>
-    </Link>
-    <button
-      onClick={() => handleDeleteShow(show.id)}
-      disabled={deletingShowId === show.id}
-      style={{
-        backgroundColor: deletingShowId === show.id ? "grey" : "#e74c3c",
-      }}
-    >
-      {deletingShowId === show.id ? "Removing..." : "Remove Show"}
-    </button>
-  </li>
-))}
-
+            <li key={show.id}>
+              <h3>{show.name}</h3>
+              <p>
+                <strong>Genre:</strong> {show.genre}
+              </p>
+              <p>
+                <strong>Summary:</strong> {show.summary}
+              </p>
+              <Link to={`/shows/${show.id}`}> {/* Navigate to show details */}
+                <button>View Show Details</button>
+              </Link>
+            </li>
+          ))}
         </ul>
       ) : (
         <p>No shows in this list yet.</p>
       )}
-
-      <Link to="/lists">
-        <button>Back to All Lists</button>
-      </Link>
     </div>
   );
 }

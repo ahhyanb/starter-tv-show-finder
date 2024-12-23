@@ -4,48 +4,64 @@ import axios from "axios";
 
 function EditList() {
   const { listId } = useParams();
-  const [title, setTitle] = useState("");
   const navigate = useNavigate();
+  const [title, setTitle] = useState(""); // Editable title
+  const [shows, setShows] = useState([]); // Shows in the list
+  const [newShowName, setNewShowName] = useState(""); // New show name input
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    async function fetchList() {
+    async function fetchListAndShows() {
       try {
         const response = await axios.get(`http://localhost:5001/lists/${listId}`);
-        setTitle(response.data.data.title);
-      } catch (error) {
-        console.error("Error fetching list:", error);
+        setTitle(response.data.data.title); // Pre-fill title
+        setShows(response.data.data.shows || []); // Set associated shows
+      } catch (err) {
+        console.error("Error fetching the list:", err);
+        alert("Failed to fetch the list. Please try again.");
       }
     }
-    fetchList();
+    fetchListAndShows();
   }, [listId]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.put(`http://localhost:5001/lists/${listId}`, {
-        data: { title },
-      });
-      navigate(`/lists/${listId}`);
-    } catch (error) {
-      console.error("Error updating list:", error);
+  const handleRemoveShow = async (showId) => {
+    if (window.confirm("Are you sure you want to remove this show?")) {
+      try {
+        await axios.delete(`http://localhost:5001/lists/${listId}/shows/${showId}`);
+        setShows((prevShows) => prevShows.filter((show) => show.id !== showId));
+      } catch (err) {
+        console.error("Error removing the show:", err);
+        alert("Failed to remove the show. Please try again.");
+      }
     }
   };
+
 
   return (
     <div>
       <h1>Edit List</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          List Title:
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Update List</button>
-      </form>
+
+      <label>
+        List Title:
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </label>
+     
+      <h2>Manage Shows</h2>
+      <ul>
+        {shows.map((show) => (
+          <li key={show.id}>
+            <h3>{show.name}</h3>
+            <button onClick={() => handleRemoveShow(show.id)}>Remove Show</button>
+          </li>
+        ))}
+      </ul>
+
+      <button onClick={() => navigate(`/lists/${listId}`)}>Back to List Details</button>
     </div>
   );
 }

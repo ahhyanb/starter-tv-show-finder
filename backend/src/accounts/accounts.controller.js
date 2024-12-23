@@ -43,6 +43,7 @@ async function read(req, res, next) {
   res.status(200).json({ data: res.locals.account });
 }
 
+
 // Create a new account
 async function create(req, res, next) {
   const newAccount = req.body.data; // Validated by `accountValid`
