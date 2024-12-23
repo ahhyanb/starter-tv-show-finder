@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.css";
-import SearchBar from "../Search/SearchBar";
+import SearchBar from "../search/SearchBar";
 import { Link } from "react-router-dom";
 
 function Header() {

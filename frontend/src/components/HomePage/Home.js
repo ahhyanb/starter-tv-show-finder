@@ -1,5 +1,5 @@
 import React from "react";
-import ListSection from "../Lists/ListSection"
+import ListSection from "../lists/ListSection";
 import MainImage from "./MainImage"
 import "./Home.css";
 

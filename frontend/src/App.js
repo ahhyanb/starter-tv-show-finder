@@ -1,19 +1,19 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/HomePage/Home";
-import ShowList from "./components/Lists/ShowLists";
-import CreateList from "./components/Lists/CreateList";
-import EditList from "./components/Lists/EditList";
-import ListSection from "./components/Lists/ListSection";
-import ShowDetails from "./components/Search/ShowDetails";
+import Home from "./components/homePage/Home";
+import ShowList from "./components/lists/ShowLists";
+import CreateList from "./components/lists/CreateList";
+import EditList from "./components/lists/EditList";
+import ListSection from "./components/lists/ListSection";
+import ShowDetails from "./components/search/ShowDetails";
 import ListAccounts from "./components/accounts/ListAccounts";
 import AccountDetails from "./components/accounts/AccountDetails";
-import Header from "./components/Header/Header";
+import Header from "./components/header/Header";
 import CreateAccount from "./components/accounts/CreateAccount";
-import CompareList from "./components/Compare/CompareList";
-import SearchResults from "./components/Search/SearchResults";
-import AddToList from "./components/Lists/AddToList";
-import ShowInTheList from "./components/Lists/ShowInTheList";
+import CompareList from "./components/compare/CompareList";
+import SearchResults from "./components/search/SearchResults";
+import AddToList from "./components/lists/AddToList";
+import ShowInTheList from "./components/lists/ShowInTheList";
 import UpdateAccount from "./components/accounts/UpdateAccount";
 
 
