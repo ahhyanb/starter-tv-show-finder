@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ListSection.css";
 
 function ListSection() {
   const [lists, setLists] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchLists() {
@@ -32,6 +33,16 @@ function ListSection() {
         </li>
       ))}
     </ul>
+
+       {/* Compare Lists Button */}
+       <button
+        className="compare-button"
+        onClick={() => navigate("/lists/compare")}
+        style={{ marginTop: "20px" }}
+      >
+        Compare Lists
+      </button>
+
   </div>
   
   );

@@ -1,0 +1,155 @@
+/* General Container Styles */
+.account-section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Titles */
+  .account-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Action Buttons */
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .action-buttons button {
+    background-color: #3498db; /* Light blue */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .action-buttons button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+  }
+  
+  /* Lists Section */
+  .account-lists {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  /* List Card */
+  .list-card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .list-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+    background-color: #f39c12; /* Yellow hover color */
+  }
+  
+  .list-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .list-card button {
+    background-color: #27ae60; /* Green for actions */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .list-card button:hover {
+    background-color: #2ecc71;
+    transform: scale(1.05);
+  }
+  
+  /* Add New List Button */
+  .add-account-button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .add-account-button:hover {
+    background-color: #2ecc71;
+    transform: scale(1.05);
+  }
+  
+  .add-account-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px #2ecc71;
+  }
+  
+  /* Empty State Text */
+  .list-card-empty {
+    color: #ccc;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .account-title {
+      font-size: 1.8rem;
+    }
+  
+    .list-card {
+      font-size: 0.9rem;
+    }
+  
+    .add-account-button {
+      font-size: 0.9rem;
+      padding: 10px 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .account-title {
+      font-size: 1.5rem;
+    }
+  
+    .list-card {
+      font-size: 0.8rem;
+      padding: 10px;
+    }
+  
+    .add-account-button {
+      font-size: 0.8rem;
+      padding: 8px 12px;
+    }
+  }
+  

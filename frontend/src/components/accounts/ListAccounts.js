@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Accounts.css"; // Import the shared CSS file
 
 function ListAccounts() {
   const [accounts, setAccounts] = useState([]); // Initialize as an empty array
-
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     const BASE_URL = "http://localhost:5001";
@@ -25,24 +24,37 @@ function ListAccounts() {
   }, []); // Dependency array ensures it runs once when component mounts
 
   return (
-    <>
-      <h1>Accounts List</h1>
-      <ul>
+    <div className="account-section">
+      <h1 className="account-title">Accounts List</h1>
+
+      {/* Add New Account Button */}
+      <button
+        className="add-account-button"
+        onClick={() => navigate("/accounts/new")}
+        style={{ marginBottom: "20px" }}
+      >
+        Add New Account
+      </button>
+
+      <div className="account-lists">
         {accounts.length > 0 ? (
           accounts.map((account) => (
-            <li key={account.id}>
+            <div className="list-card" key={account.id}>
               <h3>{account.name}</h3>
               <p>{account.username}</p>
-              <button onClick={() => navigate(`/accounts/${account.id}`)}
-              
-                >View List</button>
-            </li>
+              <button
+                className="list-card-button"
+                onClick={() => navigate(`/accounts/${account.id}`)}
+              >
+                View List
+              </button>
+            </div>
           ))
         ) : (
           <p>Loading accounts...</p> // Show a message while data is being fetched
         )}
-      </ul>
-    </>
+      </div>
+    </div>
   );
 }
 

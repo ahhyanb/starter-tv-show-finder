@@ -45,6 +45,7 @@ function App() {
 
         <Route path="/lists/:showId/new" element={<AddToList />} />
 
+        <Route path="/search" element={<SearchResults />} />
 
         {/* Fallback for undefined routes */}
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />

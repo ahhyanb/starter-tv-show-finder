@@ -1,9 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Accounts.css"; // Import the CSS file
 
 function CreateAccount() {
-  const [newAccount, setNewAccount] = useState(null); // Changed to `null` initially
+  const [newAccount, setNewAccount] = useState(null);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
@@ -21,26 +22,25 @@ function CreateAccount() {
       const response = await axios.post(`${BASE_URL}/accounts`, inputs);
       setNewAccount(response.data.data); // Save the newly created account
 
-      alert("Account created successfully!");  
+      alert("Account created successfully!");
 
       const accountId = response.data.data.id;
       navigate(`/accounts/${accountId}`);
-
     } catch (error) {
       console.error("There was a problem creating the new account.", error);
       alert("Failed to create account. Please try again.");
     }
-  
   };
 
   return (
-    <>
-      <h1>Create New Account</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="account-section">
+      <h1 className="account-title">Create New Account</h1>
+      <form className="account-form" onSubmit={handleSubmit}>
         <label>
           Name:
           <input
             type="text"
+            className="form-input"
             onChange={handleNameChange}
             value={name}
             required
@@ -50,16 +50,17 @@ function CreateAccount() {
           Username:
           <input
             type="text"
+            className="form-input"
             onChange={handleUsernameChange}
             value={username}
             required
           />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" className="add-account-button">Submit</button>
       </form>
 
       {newAccount && (
-        <div>
+        <div className="list-card">
           <h2>Account Created:</h2>
           <p>
             <strong>Name:</strong> {newAccount.name}
@@ -69,7 +70,7 @@ function CreateAccount() {
           </p>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

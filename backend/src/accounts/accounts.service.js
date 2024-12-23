@@ -28,12 +28,14 @@ function create(newAccount) {
 }
 
 function update(updatedAccount) {
+  const { id, name, username } = updatedAccount; // Only valid columns
   return knex("accounts")
-    .where({ id: updatedAccount.id })
-    .update(updatedAccount)
+    .where({ id }) // Match by id
+    .update({ name, username }) // Update only name and username
     .returning("*")
-    .then((rows) => rows[0]);
+    .then((rows) => rows[0]); // Return the updated row
 }
+
 
 function deleteAccount(accountId) {
   return knex("accounts")

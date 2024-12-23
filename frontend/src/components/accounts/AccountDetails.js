@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Accounts.css"; // Import the CSS file
 
 function AccountDetails() {
   const [accountDetails, setAccountDetails] = useState({});
@@ -44,11 +45,10 @@ function AccountDetails() {
   const handleCreateNewList = () => {
     navigate(`/lists/new?accountId=${accountId}&username=${accountDetails.username}`);
   };
-  
 
   return (
-    <div>
-      <h1>{accountDetails.name || "Account Details"}</h1>
+    <div className="account-section">
+      <h1 className="account-title">{accountDetails.name || "Account Details"}</h1>
       <p>
         <strong>Username:</strong> {accountDetails.username}
       </p>
@@ -57,24 +57,26 @@ function AccountDetails() {
         <button onClick={handleDelete}>Delete Account</button>
       </div>
 
-      <h2>Lists</h2>
+      <h2 className="account-title">Lists</h2>
       {accountLists.length === 0 ? (
         <>
-          <h3>This account has no lists.</h3>
-          <button onClick={handleCreateNewList}>Create New List</button>
+          <h3 className="list-card">This account has no lists.</h3>
+          <button className="list-card-button" onClick={handleCreateNewList}>
+            Create New List
+          </button>
         </>
       ) : (
-        <ul>
+        <div className="account-lists">
           {accountLists.map((list) => (
-            <li key={list.id}>
+            <div className="list-card" key={list.id}>
               <h3>{list.title}</h3>
               <button onClick={() => navigate(`/lists/${list.id}`)}>View List</button>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
       {/* Always show the "Create New List" button */}
-      <button onClick={handleCreateNewList} style={{ marginTop: "20px" }}>
+      <button className="add-account-button" onClick={handleCreateNewList} style={{ marginTop: "20px" }}>
         Create New List
       </button>
     </div>

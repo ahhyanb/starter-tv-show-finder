@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Accounts.css"; // Import shared CSS for consistency
 
 function UpdateAccount() {
   const { accountId } = useParams(); // Get the accountId from the URL
@@ -46,13 +47,13 @@ function UpdateAccount() {
   };
 
   if (isLoading) {
-    return <p>Loading account details...</p>;
+    return <p className="loading-text">Loading account details...</p>;
   }
 
   return (
-    <div>
-      <h1>Update Account</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="account-section">
+      <h1 className="account-title">Update Account</h1>
+      <form className="account-form" onSubmit={handleSubmit}>
         <label>
           Name:
           <input
@@ -73,8 +74,14 @@ function UpdateAccount() {
             required
           />
         </label>
-        <button type="submit">Update Account</button>
-        <button type="button" onClick={() => navigate(-1)}>Cancel</button>
+        <div className="form-buttons">
+          <button type="submit" className="update-button">
+            Update Account
+          </button>
+          <button type="button" className="cancel-button" onClick={() => navigate(-1)}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
