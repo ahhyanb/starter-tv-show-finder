@@ -17,7 +17,7 @@ function ShowList() {
   useEffect(() => {
     async function fetchListAndShows() {
       try {
-        const response = await axios.get(`{BASE_URL}/lists/${listId}`);
+        const response = await axios.get(`${BASE_URL}/lists/${listId}`);
         setList(response.data.data); // Set list details
         setShows(response.data.data.shows || []); // Set associated shows
       } catch (err) {
