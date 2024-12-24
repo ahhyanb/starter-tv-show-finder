@@ -9,9 +9,10 @@ function AccountDetails() {
   const { accountId } = useParams();
   const navigate = useNavigate();
 
+  const BASE_URL = process.env.REACT_APP_API_URL;
+  
   useEffect(() => {
-    const BASE_URL = "https://starter-tv-show-finder.onrender.com";
-
+    
     const fetchAccountDetails = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/accounts/${accountId}`);
@@ -27,11 +28,10 @@ function AccountDetails() {
 
   const handleDelete = async () => {
     
-    const BASE_URL = "https://starter-tv-show-finder.onrender.com/";
     
     if (window.confirm("Are you sure you want to delete this account? This action is irreversible.")) {
       try {
-        await axios.delete(`${BASE_URL}/${accountId}`);
+        await axios.delete(`${BASE_URL}/accounts/${accountId}`);
         alert("Account deleted successfully.");
         navigate("/accounts");
       } catch (error) {
