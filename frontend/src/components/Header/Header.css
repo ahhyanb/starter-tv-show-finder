@@ -1,7 +1,7 @@
+/* Header */
 .header {
   display: flex;
-  flex-direction: column; /* Stacks the header elements vertically */
-  align-items: center;
+  flex-direction: column;
   padding: 20px 40px;
   background-color: #1f1f1f;
   color: white;
@@ -9,39 +9,39 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers the content horizontally */
+  align-items: center; /* Center-aligns everything horizontally */
 }
 
+/* First Row: Centered Logo */
 .logo-container {
   display: flex;
+  justify-content: center; /* Centers the logo */
   align-items: center;
-  gap: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 10px; /* Adds spacing below the logo */
 }
 
 .logo {
   width: 300px;
-  height: 150px;
+  height: auto;
   object-fit: contain;
-  /* background-color: white; */
 }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0;
+/* Second Row: Navigation Links and Search Bar */
+.header-bottom {
+  display: flex;
+  justify-content: space-between; /* Distributes nav links and search bar */
+  align-items: center; /* Centers items vertically */
+  width: 100%;
+  max-width: 1200px; /* Aligns content with the header width */
+  padding: 10px 0; /* Adds vertical padding */
+  border-top: 1px solid #333; /* Optional: Adds a divider between rows */
 }
 
+/* Navigation Bar */
 .nav {
-  margin-bottom: 15px; /* Adds spacing between nav and search bar */
+  display: flex;
+  gap: 25px;
 }
 
 .nav-list {
@@ -50,43 +50,39 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  justify-content: center;
 }
 
 .nav-item {
-  position: relative;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .link {
   text-decoration: none;
   color: white;
-  font-size: 1.1rem;
-  font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .link:hover {
-  color: #f39c12; /* Vibrant hover effect */
+  color: #f39c12; /* Changes color on hover */
 }
 
+/* Search Bar */
 .search-container {
   display: flex;
-  gap: 8px; /* Reduced spacing for a smaller appearance */
-  margin-top: 10px;
-  width: 50%; /* Adjust width to make it smaller */
-  justify-content: center;
+  gap: 8px;
+  align-items: center;
 }
 
 .search-bar {
-  width: 70%; /* Reduced the width for a smaller size */
-  padding: 8px; /* Smaller padding for a compact look */
-  font-size: 0.9rem; /* Reduced font size */
+  width: 250px;
+  padding: 8px;
+  font-size: 0.9rem;
   border: 1px solid #555;
   border-radius: 5px;
   background-color: #2a2a2a;
   color: white;
   outline: none;
-  transition: border-color 0.3s ease;
 }
 
 .search-bar::placeholder {
@@ -98,17 +94,16 @@
 }
 
 .search-button {
-  padding: 8px 16px; /* Smaller padding for the button */
-  font-size: 0.9rem; /* Reduced font size */
+  padding: 8px 16px;
+  font-size: 0.9rem;
   color: white;
   background-color: #f39c12;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 .search-button:hover {
-  background-color: #d37f10;
-  transform: scale(1.05);
+  background-color: #d37f10; /* Changes color on hover */
 }

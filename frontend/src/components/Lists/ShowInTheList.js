@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useLocation, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Lists.css"
 
 function ShowInTheList() {
   const { listId } = useParams(); // Extract list ID from the URL

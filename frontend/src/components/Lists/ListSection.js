@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./ListSection.css";
+import "./Lists.css"; // Assuming the CSS file is named styles.css
 
 function ListSection() {
   const [lists, setLists] = useState([]);
@@ -21,30 +21,33 @@ function ListSection() {
 
   return (
     <div>
-    <h1 className="list-title">All TV Show Lists</h1> {/* Styled Title */}
-    <ul className="list-section">
-      {lists.map((list) => (
-        <li key={list.id} className="card">
-          <h3>{list.title}</h3>
-          {/* Add link to navigate to ShowList component */}
-          <Link to={`/lists/${list.id}`}>
-            <button>View List</button>
-          </Link>
-        </li>
-      ))}
-    </ul>
+      <h1 className="list-title">All TV Show Lists</h1>
+      <ul className="list-section">
+        {lists.map((list) => (
+          <li key={list.id} className="card">
+            <h3>{list.title}</h3>
+            <Link to={`/lists/${list.id}`}>
+              <button className="button-primary">View List</button>
+            </Link>
+          </li>
+        ))}
+      </ul>
 
-       {/* Compare Lists Button */}
-       <button
-        className="compare-button"
-        onClick={() => navigate("/lists/compare")}
-        style={{ marginTop: "20px" }}
-      >
-        Compare Lists
-      </button>
-
-  </div>
-  
+      <div className="button-container">
+        <button
+          className="add-new-list-button"
+          onClick={() => navigate("/lists/new")}
+        >
+          Add New List
+        </button>
+        <button
+          className="compare-button"
+          onClick={() => navigate("/lists/compare")}
+        >
+          Compare Lists
+        </button>
+      </div>
+    </div>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchShowData } from "../../utils/fetchShowData";
-import "./SearchResults.css";
+
 
 function SearchResults() {
   const [results, setResults] = useState([]);

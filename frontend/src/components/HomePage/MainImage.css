@@ -1,71 +1,72 @@
 /* General Styles */
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #1f1f1f; /* Matches header background color */
-    font-family: Arial, sans-serif;
-    color: white;
-    overflow-x: hidden; /* Prevents horizontal scroll on small screens */
-  }
-  
-  /* HomePage Container */
-  .homepage {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center the content vertically */
-    min-height: 100vh; /* Full viewport height */
-    position: relative; /* Allows for text positioning over the image */
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
-    text-align: center; /* Ensures centered text alignment */
-  }
-  
-  /* Image Container */
-  .main-image-container {
-    position: relative; /* Enables positioning for text overlay */
-    width: 100%; /* Ensures container spans full width */
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Crops any overflow from the image */
-    margin: 0; /* Removes default margin */
-  }
-  
-  /* Main Image */
-  .main-image {
-    width: 100%; /* Ensures the image spans the container width */
-    height: 100%; /* Ensures the image spans the container height */
-    object-fit: cover; /* Crops the image to fully fill the container */
-    border-radius: 0; /* Removes rounded corners for a flush look */
-    margin: 0; /* Removes any default margin */
-    padding: 0; /* Removes any default padding */
-  }
-  
-  /* Overlay Text */
+  margin: 0;
+  padding: 0;
+  background-color: #1f1f1f; /* Matches header background color */
+  font-family: Arial, sans-serif;
+  color: white;
+  overflow-x: hidden; /* Prevents horizontal scroll on small screens */
+}
+
+/* HomePage Container */
+.homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the content vertically */
+  min-height: 100vh; /* Full viewport height */
+  position: relative; /* Allows for text positioning over the image */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+  text-align: center; /* Ensures centered text alignment */
+}
+
+/* Image Container */
+.main-image-container {
+  position: relative; /* Enables positioning for text overlay */
+  width: 100%; /* Ensures container spans full width */
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Crops any overflow from the image */
+  margin: 0; /* Removes default margin */
+}
+
+/* Main Image */
+.main-image {
+  width: 100%; /* Ensures the image spans the container width */
+  height: 100%; /* Ensures the image spans the container height */
+  object-fit: cover; /* Crops the image to fully fill the container */
+  border-radius: 0; /* Removes rounded corners for a flush look */
+  margin: 0; /* Removes any default margin */
+  padding: 0; /* Removes any default padding */
+}
+
+/* Overlay Text */
+.overlay-text {
+  position: absolute; /* Positions text over the image */
+  top: 15%; /* Moves text near the top */
+  right: 5%; /* Moves text to the right */
+  color: white;
+  font-size: 3rem; /* Adjusts text size */
+  font-weight: bold;
+  text-align: right; /* Aligns text to the right */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds depth to the text */
+  padding: 10px; /* Adds padding for better readability */
+  max-width: 40%; /* Prevents text from overflowing */
+  word-wrap: break-word; /* Ensures text wraps correctly */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
   .overlay-text {
-    position: absolute; /* Positions text over the image */
-    top: 50%; /* Centers text vertically */
-    left: 50%; /* Centers text horizontally */
-    transform: translate(-50%, -50%); /* Precisely centers the text */
-    color: white;
-    font-size: 3rem; /* Adjusts text size */
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds depth to the text */
-    padding: 10px; /* Adds padding for better readability */
-    max-width: 90%; /* Prevents text from overflowing */
-    word-wrap: break-word; /* Ensures text wraps correctly */
+    font-size: 2.5rem; /* Scale down text size */
+    top: 10%; /* Adjusts vertical position for smaller screens */
+    right: 5%; /* Ensures consistent positioning */
   }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .overlay-text {
-      font-size: 2.5rem; /* Scale down text size */
-    }
+}
+
+@media (max-width: 480px) {
+  .overlay-text {
+    font-size: 2rem; /* Further scale down text size */
+    top: 5%; /* Adjusts vertical position for smaller screens */
+    right: 5%; /* Ensures consistent positioning */
   }
-  
-  @media (max-width: 480px) {
-    .overlay-text {
-      font-size: 2rem; /* Further scale down text size */
-      top: 45%; /* Adjusts vertical position for smaller screens */
-    }
-  }
-  
+}
