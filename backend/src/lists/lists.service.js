@@ -1,4 +1,5 @@
 const knex = require("../db/connection");
+const axios = require("axios");
 
 function fetchListData(filter = {}) {
   return knex("lists")
@@ -92,7 +93,29 @@ function destroy(listId) {
   return knex("lists").where({ id: listId }).del();
 }
 
-function addShowToList(listId, showId) {
+
+async function addShowToList(listId, showId) {
+  // Step 1: Check if the show exists in the `shows` table
+  const existingShow = await knex("shows").where({ id: showId }).first();
+
+  if (!existingShow) {
+    // Step 2: Fetch show details from the external API
+    const apiResponse = await axios.get(`https://api.tvmaze.com/shows/${showId}`);
+    const showData = apiResponse.data;
+
+    // Step 3: Extract relevant fields to match your `shows` table schema
+    const newShow = {
+      id: showData.id,
+      name: showData.name,
+      genre: showData.genres.join(", "),
+      summary: showData.summary,
+    };
+
+    // Step 4: Insert the new show into the `shows` table
+    await knex("shows").insert(newShow);
+  }
+
+  // Step 5: Add the show to the `shows_lists` table
   return knex("shows_lists")
     .insert({ list_id: listId, show_id: showId })
     .returning("*")
