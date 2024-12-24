@@ -8,7 +8,8 @@ function ListAccounts() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const BASE_URL = "http://localhost:5001";
+    
+   const BASE_URL = "https://starter-tv-show-finder.onrender.com/";
 
     const fetchList = async () => {
       try {
