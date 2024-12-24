@@ -14,11 +14,15 @@ function AddToList() {
   const { showId } = useParams(); // Get showId from route params
   const navigate = useNavigate();
 
+
+  const BASE_URL = process.env.REACT_APP_API_URL;
+  
   // Fetch all lists on component mount
   useEffect(() => {
+    
     const fetchLists = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/lists");
+        const response = await axios.get(`${BASE_URL}/lists`);
         setLists(response.data.data || []); // Set fetched lists
       } catch (err) {
         setError("Failed to fetch lists. Please try again.");
@@ -50,7 +54,7 @@ function AddToList() {
       console.log(`Sending PUT request to /lists/${selectedList} with payload:`, payload);
 
       // Send the PUT request to add the show
-      await axios.put(`http://localhost:5001/lists/${selectedList}/shows`, payload);
+      await axios.put(`${BASE_URL}/lists/${selectedList}/shows`, payload);
 
       setSuccess(true);
 
