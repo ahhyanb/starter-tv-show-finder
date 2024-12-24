@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Lists.css"
+import "./Lists.css";
 
 function AddToList() {
   const [lists, setLists] = useState([]);
@@ -30,39 +30,38 @@ function AddToList() {
   // Handle adding the show to the selected list
   const handleAdd = async () => {
     if (!selectedList) {
-        setError("Please select a list.");
-        return;
+      setError("Please select a list.");
+      return;
     }
 
     if (!showId) {
-        setError("Show ID is missing.");
-        return;
+      setError("Show ID is missing.");
+      return;
     }
 
     try {
-        setLoading(true);
-        setError("");
-        setSuccess(false);
+      setLoading(true);
+      setError("");
+      setSuccess(false);
 
-        const payload = { data: { showId } }; // Payload for the PUT request
+      const payload = { data: { showId } }; // Payload for the PUT request
 
-        console.log(`Sending PUT request to /lists/${selectedList} with payload:`, payload);
+      console.log(`Sending PUT request to /lists/${selectedList} with payload:`, payload);
 
-        // Send the PUT request to add the show
-        await axios.put(`http://localhost:5001/lists/${selectedList}/shows`, payload);
+      // Send the PUT request to add the show
+      await axios.put(`http://localhost:5001/lists/${selectedList}/shows`, payload);
 
-        setSuccess(true);
+      setSuccess(true);
 
-        // Navigate to the specific list page
-        navigate(`/lists/${selectedList}`);
+      // Navigate to the specific list page
+      navigate(`/lists/${selectedList}`);
     } catch (err) {
-        console.error("Error adding show to the list:", err.response?.data || err.message);
-        setError(err.response?.data?.error || "Failed to add show to the list.");
+      console.error("Error adding show to the list:", err.response?.data || err.message);
+      setError(err.response?.data?.error || "Failed to add show to the list.");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
-
+  };
 
   // Navigate back to the previous page
   const goBack = () => navigate(-1);

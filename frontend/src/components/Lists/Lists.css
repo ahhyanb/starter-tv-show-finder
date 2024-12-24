@@ -5,6 +5,7 @@ body {
     color: #ffffff; /* White text for better contrast */
     margin: 0;
     padding: 0;
+    
   }
   
   button {
@@ -60,6 +61,13 @@ body {
     border: none;
     border-radius: 5px;
     font-size: 1rem;
+  }
+
+  .button-container {
+    display: flex; /* Arrange buttons in a row */
+    justify-content: center; /* Center the buttons */
+    gap: 10px; /* Add space between buttons */
+    margin-top: 20px; /* Add spacing above the container */
   }
   
   /* List Section Styles */

@@ -33,7 +33,7 @@ function ShowInTheList() {
   }
 
   return (
-    <div>
+    <div className="">
       <h1>{show.name}</h1>
       <p>
         <strong>Genre:</strong> {show.genre}
