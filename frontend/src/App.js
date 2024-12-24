@@ -16,11 +16,12 @@ import AddToList from "./components/lists/AddToList";
 import ShowInTheList from "./components/lists/ShowInTheList";
 import UpdateAccount from "./components/accounts/UpdateAccount";
 import About from "./components/about/About";
+import "./utils/center.css"
 
 
 function App() {
   return (
-    <>
+    <div classname="container">
       <Header />
   
       <Routes>
@@ -54,7 +55,7 @@ function App() {
         <Route path="/about" element={<About />} />
       </Routes>
 
-    </>
+    </div>
   );
 }
 

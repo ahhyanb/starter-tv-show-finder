@@ -1,0 +1,31 @@
+/*  */
+
+  .container {
+    text-align: center; /* Center text within components */
+    width: 90%;         /* Limit the container width for responsiveness */
+    max-width: 600px;   /* Restrict maximum width for larger screens */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* Responsive Design Tweaks */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px; /* Reduce padding for smaller screens */
+    }
+  
+    body {
+      height: auto; /* Allow scroll for smaller devices */
+      flex-direction: column; /* Adjust layout for narrow screens */
+      padding: 10px; /* Add padding for better spacing */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      width: 95%; /* Increase width usage for very small screens */
+      font-size: 0.9rem; /* Slightly smaller font for better fit */
+    }
+  }
+  

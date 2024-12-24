@@ -82,10 +82,19 @@ function create(newList) {
     .then((rows) => rows[0]);
 }
 
-async function update(listId, updatedList) {
-  await knex("lists").where({ id: listId }).update(updatedList); // Perform the update
-  // console.log("Updated List:", updatedList);
-  return readId(listId); // Fetch the updated list with associated shows
+async function update(listId, updatedFields) {
+  const existingList = await knex("lists").where({ id: listId }).first();
+
+  if (!existingList) {
+    throw new Error(`List with ID ${listId} not found.`);
+  }
+
+  // Merge existing fields with updated fields
+  const updatedList = { ...existingList, ...updatedFields };
+
+  await knex("lists").where({ id: listId }).update(updatedList);
+
+  return readId(listId); // Return the updated list
 }
 
 

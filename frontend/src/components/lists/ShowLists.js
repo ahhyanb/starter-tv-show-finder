@@ -92,7 +92,7 @@ function ShowList() {
           ))}
         </ul>
       ) : (
-        <p className="no-shows-message">No shows in this list yet.</p>
+        <p className="no-shows-message">No shows in this list yet. Use the the search bar to find a TV Show to add to the list.</p>
       )}
     </div>
   );
