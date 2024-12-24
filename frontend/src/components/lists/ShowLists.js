@@ -10,10 +10,12 @@ function ShowList() {
   const [shows, setShows] = useState([]); // Shows in the list
   const [error, setError] = useState(null);
 
+  const BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     async function fetchListAndShows() {
       try {
-        const response = await axios.get(`http://localhost:5001/lists/${listId}`);
+        const response = await axios.get(`{BASE_URL}/lists/${listId}`);
         setList(response.data.data); // Set list details
         setShows(response.data.data.shows || []); // Set associated shows
       } catch (err) {
@@ -27,7 +29,7 @@ function ShowList() {
   const handleRemoveShow = async (showId) => {
     if (window.confirm("Are you sure you want to remove this show from the list?")) {
       try {
-        await axios.delete(`http://localhost:5001/lists/${listId}/shows/${showId}`);
+        await axios.delete(`${BASE_URL}/lists/${listId}/shows/${showId}`);
         setShows((prevShows) => prevShows.filter((show) => show.id !== showId)); // Remove from local state
         alert("Show removed successfully.");
       } catch (err) {
