@@ -12,10 +12,10 @@ function CreateAccount() {
   const handleNameChange = (event) => setName(event.target.value);
   const handleUsernameChange = (event) => setUsername(event.target.value);
 
+  const BASE_URL = process.env.REACT_APP_API_URL;
+
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission
-
-    const BASE_URL = "https://starter-tv-show-finder.onrender.com/";
 
     try {
       const inputs = { data: { username, name } };
