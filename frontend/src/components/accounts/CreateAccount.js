@@ -15,7 +15,7 @@ function CreateAccount() {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission
 
-    const BASE_URL = "http://localhost:5001";
+    const BASE_URL = "https://starter-tv-show-finder.onrender.com/";
 
     try {
       const inputs = { data: { username, name } };
