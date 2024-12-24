@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Lists.css"
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 function CreateList() {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -14,8 +16,7 @@ function CreateList() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true); // Mark as submitting
-    
-    const BASE_URL = process.env.REACT_APP_API_URL;
+  
   
     try {
       let accountId;

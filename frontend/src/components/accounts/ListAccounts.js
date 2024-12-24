@@ -3,12 +3,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Accounts.css"; // Import the shared CSS file
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 function ListAccounts() {
   const [accounts, setAccounts] = useState([]); // Initialize as an empty array
   const navigate = useNavigate();
-
-  const BASE_URL = process.env.REACT_APP_API_URL;
-
+  
   useEffect(() => {
 
     const fetchList = async () => {

@@ -3,14 +3,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Accounts.css"; // Import shared CSS for consistency
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 function UpdateAccount() {
   const { accountId } = useParams(); // Get the accountId from the URL
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({ name: "", username: "" });
   const [isLoading, setIsLoading] = useState(true);
-
-  const BASE_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     // Fetch the current account details to pre-fill the form

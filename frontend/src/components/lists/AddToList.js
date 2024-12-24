@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Lists.css";
 
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 function AddToList() {
   const [lists, setLists] = useState([]);
@@ -14,8 +15,6 @@ function AddToList() {
   const { showId } = useParams(); // Get showId from route params
   const navigate = useNavigate();
 
-
-  const BASE_URL = process.env.REACT_APP_API_URL;
   
   // Fetch all lists on component mount
   useEffect(() => {

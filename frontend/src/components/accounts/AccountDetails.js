@@ -3,14 +3,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Accounts.css"; // Import the CSS file
 
+ const BASE_URL = process.env.REACT_APP_API_URL;
+
 function AccountDetails() {
   const [accountDetails, setAccountDetails] = useState({});
   const [accountLists, setAccountLists] = useState([]);
   const { accountId } = useParams();
   const navigate = useNavigate();
 
-  const BASE_URL = process.env.REACT_APP_API_URL;
-  
   useEffect(() => {
     
     const fetchAccountDetails = async () => {

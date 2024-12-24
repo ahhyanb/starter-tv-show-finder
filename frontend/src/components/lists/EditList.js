@@ -3,15 +3,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Lists.css"
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 function EditList() {
   const { listId } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = useState(""); // Editable title
   const [shows, setShows] = useState([]); // Shows in the list
-  const [newShowName, setNewShowName] = useState(""); // New show name input
-  const [isSaving, setIsSaving] = useState(false);
 
-  const BASE_URL = process.env.REACT_APP_API_URL;
+
 
   useEffect(() => {
     async function fetchListAndShows() {

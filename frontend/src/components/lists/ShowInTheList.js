@@ -3,6 +3,8 @@ import { useParams, useLocation, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Lists.css"
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 function ShowInTheList() {
   const { listId } = useParams(); // Extract list ID from the URL
   const location = useLocation();
@@ -18,7 +20,7 @@ function ShowInTheList() {
     if (window.confirm("Are you sure you want to remove this show from the list?")) {
       try {
         console.log(`Deleting showId=${show.id} from listId=${listId}`);
-        await axios.delete(`http://localhost:5001/lists/${listId}/shows/${show.id}`);
+        await axios.delete(`${BASE_URL}/lists/${listId}/shows/${show.id}`);
         alert("Show removed successfully.");
         navigate(`/lists/${listId}`); // Navigate back to the list page
       } catch (error) {

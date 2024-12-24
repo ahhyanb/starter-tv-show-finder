@@ -3,6 +3,8 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Lists.css";
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 function ShowList() {
   const { listId } = useParams();
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ function ShowList() {
   const [shows, setShows] = useState([]); // Shows in the list
   const [error, setError] = useState(null);
 
-  const BASE_URL = process.env.REACT_APP_API_URL;
+
 
   useEffect(() => {
     async function fetchListAndShows() {

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 function CompareLists() {
   const [lists, setLists] = useState([]);
   const [selectedListIds, setSelectedListIds] = useState([]);
@@ -10,7 +12,6 @@ function CompareLists() {
 
   useEffect(() => {
     const fetchLists = async () => {
-      const BASE_URL = process.env.REACT_APP_API_URL;
       try {
         const response = await axios.get(`${BASE_URL}/lists`);
         setLists(response.data.data);
