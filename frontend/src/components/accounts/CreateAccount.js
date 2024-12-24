@@ -15,6 +15,7 @@ function CreateAccount() {
   const BASE_URL = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (event) => {
+    
     event.preventDefault(); // Prevent default form submission
 
     try {

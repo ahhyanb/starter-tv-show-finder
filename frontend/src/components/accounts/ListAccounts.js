@@ -8,20 +8,32 @@ const BASE_URL = process.env.REACT_APP_API_URL;
 function ListAccounts() {
   const [accounts, setAccounts] = useState([]); // Initialize as an empty array
   const navigate = useNavigate();
-  
+
   useEffect(() => {
+    const controller = new AbortController(); // Create an AbortController instance
 
     const fetchList = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/accounts`);
+        const response = await axios.get(`${BASE_URL}/accounts`, {
+          signal: controller.signal, // Attach the signal to the Axios request
+        });
         setAccounts(response.data.data); // Assuming API returns { data: { data: [...] } }
         console.log("Fetched accounts:", response.data.data);
       } catch (error) {
-        console.error("There was a problem fetching the accounts:", error);
+        if (error.name === "CanceledError") {
+          console.log("Fetch canceled:", error.message);
+        } else {
+          console.error("There was a problem fetching the accounts:", error);
+        }
       }
     };
 
     fetchList();
+
+    // Cleanup function to abort the fetch if the component unmounts
+    return () => {
+      controller.abort();
+    };
   }, []); // Dependency array ensures it runs once when component mounts
 
   return (

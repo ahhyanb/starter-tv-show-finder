@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Lists.css"
+import "./Lists.css";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -11,20 +11,31 @@ function EditList() {
   const [title, setTitle] = useState(""); // Editable title
   const [shows, setShows] = useState([]); // Shows in the list
 
-
-
   useEffect(() => {
+    const controller = new AbortController(); // Create an AbortController instance
+
     async function fetchListAndShows() {
       try {
-        const response = await axios.get(`${BASE_URL}/lists/${listId}`);
+        const response = await axios.get(`${BASE_URL}/lists/${listId}`, {
+          signal: controller.signal, // Attach the signal to Axios request
+        });
         setTitle(response.data.data.title); // Pre-fill title
         setShows(response.data.data.shows || []); // Set associated shows
       } catch (err) {
-        console.error("Error fetching the list:", err);
-        alert("Failed to fetch the list. Please try again.");
+        if (err.name === "CanceledError") {
+          console.log("Fetch aborted:", err.message); // Handle fetch abortion
+        } else {
+          console.error("Error fetching the list:", err);
+          alert("Failed to fetch the list. Please try again.");
+        }
       }
     }
+
     fetchListAndShows();
+
+    return () => {
+      controller.abort(); // Abort the fetch request on component unmount
+    };
   }, [listId]);
 
   const handleRemoveShow = async (showId) => {
@@ -39,7 +50,6 @@ function EditList() {
     }
   };
 
-
   return (
     <div>
       <h1>Edit List</h1>
@@ -53,7 +63,7 @@ function EditList() {
           required
         />
       </label>
-     
+
       <h2>Manage Shows</h2>
       <ul>
         {shows.map((show) => (

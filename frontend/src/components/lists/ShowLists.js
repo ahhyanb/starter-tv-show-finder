@@ -12,20 +12,31 @@ function ShowList() {
   const [shows, setShows] = useState([]); // Shows in the list
   const [error, setError] = useState(null);
 
-
-
   useEffect(() => {
+    const controller = new AbortController(); // Create an AbortController instance
+
     async function fetchListAndShows() {
       try {
-        const response = await axios.get(`${BASE_URL}/lists/${listId}`);
+        const response = await axios.get(`${BASE_URL}/lists/${listId}`, {
+          signal: controller.signal, // Attach the signal to Axios request
+        });
         setList(response.data.data); // Set list details
         setShows(response.data.data.shows || []); // Set associated shows
       } catch (err) {
-        console.error("Error fetching the list:", err);
-        setError("Failed to fetch the list. Please try again.");
+        if (err.name === "CanceledError") {
+          console.log("Fetch aborted:", err.message); // Handle fetch abortion
+        } else {
+          console.error("Error fetching the list:", err);
+          setError("Failed to fetch the list. Please try again.");
+        }
       }
     }
+
     fetchListAndShows();
+
+    return () => {
+      controller.abort(); // Abort the fetch request on component unmount
+    };
   }, [listId]);
 
   const handleRemoveShow = async (showId) => {

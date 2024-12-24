@@ -15,20 +15,31 @@ function AddToList() {
   const { showId } = useParams(); // Get showId from route params
   const navigate = useNavigate();
 
-  
   // Fetch all lists on component mount
   useEffect(() => {
-    
+    const controller = new AbortController(); // Create an AbortController instance
+
     const fetchLists = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/lists`);
+        const response = await axios.get(`${BASE_URL}/lists`, {
+          signal: controller.signal, // Attach the signal to Axios request
+        });
         setLists(response.data.data || []); // Set fetched lists
       } catch (err) {
-        setError("Failed to fetch lists. Please try again.");
+        if (err.name === "CanceledError") {
+          console.log("Fetch aborted:", err.message); // Handle fetch abortion
+        } else {
+          console.error("Failed to fetch lists:", err);
+          setError("Failed to fetch lists. Please try again.");
+        }
       }
     };
 
     fetchLists();
+
+    return () => {
+      controller.abort(); // Abort the fetch request on component unmount
+    };
   }, []);
 
   // Handle adding the show to the selected list

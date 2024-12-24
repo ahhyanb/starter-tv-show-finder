@@ -3,25 +3,37 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Lists.css"; // Assuming the CSS file is named styles.css
 
-
 const BASE_URL = process.env.REACT_APP_API_URL;
- // Check the output in the browser console
 
 function ListSection() {
   const [lists, setLists] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const controller = new AbortController(); // Create an AbortController instance
+
     async function fetchLists() {
       try {
-        const response = await axios.get(`${BASE_URL}/lists`);
+        const response = await axios.get(`${BASE_URL}/lists`, {
+          signal: controller.signal, // Attach the signal to Axios request
+        });
         setLists(response.data.data);
-        console.log(response.data.data)
+        console.log("Fetched lists:", response.data.data);
       } catch (error) {
-        console.error("Error fetching lists:", error);
+        if (error.name === "CanceledError") {
+          console.log("Fetch aborted:", error.message); // Handle fetch abortion
+        } else {
+          console.error("Error fetching lists:", error);
+        }
       }
     }
+
     fetchLists();
+
+    // Cleanup function to abort the fetch request on component unmount
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return (

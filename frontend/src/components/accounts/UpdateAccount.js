@@ -13,21 +13,33 @@ function UpdateAccount() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const controller = new AbortController(); // Create an AbortController
+
     // Fetch the current account details to pre-fill the form
     const fetchAccountDetails = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/accounts/${accountId}`);
+        const response = await axios.get(`${BASE_URL}/accounts/${accountId}`, {
+          signal: controller.signal, // Attach the signal to Axios request
+        });
         const account = response.data.data;
         setFormData({ name: account.name, username: account.username });
         setIsLoading(false);
       } catch (error) {
-        console.error("Error fetching account details:", error);
-        alert("Failed to fetch account details. Please try again.");
-        navigate("/accounts"); // Redirect to the accounts list if fetch fails
+        if (error.name === "CanceledError") {
+          console.log("Fetch aborted:", error.message); // Handle fetch abortion
+        } else {
+          console.error("Error fetching account details:", error);
+          alert("Failed to fetch account details. Please try again.");
+          navigate("/accounts"); // Redirect to the accounts list if fetch fails
+        }
       }
     };
 
     fetchAccountDetails();
+
+    return () => {
+      controller.abort(); // Abort the fetch request on component unmount
+    };
   }, [accountId, navigate]);
 
   const handleChange = (event) => {

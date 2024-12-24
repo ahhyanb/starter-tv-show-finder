@@ -12,10 +12,13 @@ function AccountDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    
+    const controller = new AbortController();
     const fetchAccountDetails = async () => {
+     
       try {
-        const response = await axios.get(`${BASE_URL}/accounts/${accountId}`);
+        const response = await axios.get(`${BASE_URL}/accounts/${accountId}`, {
+          signal: controller.signal,
+        });        
         setAccountDetails(response.data.data); // Set the account details
         setAccountLists(response.data.data.lists || []); // Set the associated lists
       } catch (error) {
@@ -24,6 +27,11 @@ function AccountDetails() {
     };
 
     fetchAccountDetails();
+
+    return () => {
+      controller.abort(); 
+    };
+
   }, [accountId]);
 
   const handleDelete = async () => {
