@@ -10,16 +10,14 @@ function CreateList() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true); // Mark as submitting
     
+    const BASE_URL = process.env.REACT_APP_API_URL;
   
     try {
-      const BASE_URL = "http://localhost:5001";
-
-      
-  
       let accountId;
   
       // Step 1: Check if the account exists
