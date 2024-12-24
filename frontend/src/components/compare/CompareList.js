@@ -10,7 +10,7 @@ function CompareLists() {
 
   useEffect(() => {
     const fetchLists = async () => {
-      const BASE_URL = "http://localhost:5001";
+      const BASE_URL = process.env.REACT_APP_API_URL;
       try {
         const response = await axios.get(`${BASE_URL}/lists`);
         setLists(response.data.data);
