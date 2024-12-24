@@ -80,38 +80,106 @@ function EditList() {
   };
   
   return (
-    <div>
-      <h1>Edit List</h1>
+    <div
+      style={{
+        maxWidth: "600px",
+        margin: "0 auto",
+        padding: "20px",
+        borderRadius: "10px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <h1
+        style={{
+          textAlign: "center",
+          color: "white",
+          marginBottom: "20px",
+        }}
+      >
+        Edit List
+      </h1>
   
-      {/* Add user instructions */}
-      <p>
-        Update the title of the list below and select the TV shows you'd like to remove
-        from the list. Click "Submit Changes" to save your updates.
+      <p
+        style={{
+          textAlign: "center",
+          color: "white",
+          fontSize: "0.9rem",
+          marginBottom: "20px",
+        }}
+      >
+        Update the title of the list below.
       </p>
   
       {/* Editable title field */}
-      <label>
+      <label style={{ display: "block", marginBottom: "15px", color: "white" }}>
         List Title:
         <input
           type="text"
           value={title}
           onChange={handleTitleChange}
           required
+          style={{
+            width: "100%",
+            padding: "10px",
+            border: "1px solid #ddd",
+            borderRadius: "5px",
+            fontSize: "1rem",
+            boxSizing: "border-box",
+            marginTop: "5px",
+          }}
         />
       </label>
   
       {/* Manage shows */}
-      <h2>Manage Shows</h2>
+      <h2
+        style={{
+          textAlign: "center",
+          color: "white",
+          marginBottom: "15px",
+        }}
+      >
+        Manage Shows
+      </h2>
+  
       <form>
-        <ul>
+        <p
+          style={{
+            textAlign: "center",
+            color: "white",
+            fontSize: "0.9rem",
+            marginBottom: "20px",
+          }}
+        >
+          Select the TV shows you'd like to remove from the list. Click "Submit
+          Changes" to save your updates.
+        </p>
+  
+        <ul style={{ listStyleType: "none", padding: "0" }}>
           {shows.map((show) => (
-            <li key={show.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={selectedShows.includes(show.id)}
-                  onChange={() => handleCheckboxChange(show.id)}
-                />
+            <li
+              key={show.id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "10px 15px",
+                marginBottom: "10px",
+                border: "3px solid #ddd",
+                borderRadius: "5px",
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={selectedShows.includes(show.id)}
+                onChange={() => handleCheckboxChange(show.id)}
+                style={{
+                  width: "18px",
+                  height: "18px",
+                  marginRight: "10px",
+                }}
+              />
+              <label style={{ flexGrow: "1", fontSize: "1rem", color: "white" }}>
                 {show.name}
               </label>
             </li>
@@ -123,14 +191,19 @@ function EditList() {
           type="button"
           onClick={handleSubmit}
           style={{
+            display: "block",
+            width: "100%",
             marginTop: "20px",
-            padding: "10px 20px",
+            padding: "12px",
             backgroundColor: "#007bff",
             color: "white",
             border: "none",
             borderRadius: "5px",
             cursor: "pointer",
+            fontSize: "1rem",
+            transition: "background-color 0.3s",
           }}
+        
         >
           Submit Changes
         </button>
@@ -140,19 +213,25 @@ function EditList() {
       <button
         onClick={() => navigate(`/lists/${listId}`)}
         style={{
-          marginTop: "20px",
-          padding: "10px 20px",
+          display: "block",
+          width: "100%",
+          marginTop: "10px",
+          padding: "12px",
           backgroundColor: "#6c757d",
           color: "white",
           border: "none",
           borderRadius: "5px",
           cursor: "pointer",
+          fontSize: "1rem",
+          transition: "background-color 0.3s",
         }}
+  
       >
         Back to List Details
       </button>
     </div>
   );
+  
   
 }
 
