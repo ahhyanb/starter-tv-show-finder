@@ -13,6 +13,11 @@ Welcome to **TV Show Finder**! This app lets users discover, search for, and sav
 
 ---
 
+## Live Application
+You can view the deployed application here: [TV Show Finder](https://starter-tv-show-finder-1.onrender.com/)
+
+---
+
 ## Tech Stack
 - **Frontend**: React, HTML, CSS
 - **Backend**: Node.js, Express
