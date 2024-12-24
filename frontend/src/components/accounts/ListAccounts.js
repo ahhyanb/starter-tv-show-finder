@@ -7,9 +7,9 @@ function ListAccounts() {
   const [accounts, setAccounts] = useState([]); // Initialize as an empty array
   const navigate = useNavigate();
 
+  const BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
-    
-   const BASE_URL = "https://starter-tv-show-finder.onrender.com/";
 
     const fetchList = async () => {
       try {
