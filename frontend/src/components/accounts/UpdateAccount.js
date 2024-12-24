@@ -10,11 +10,13 @@ function UpdateAccount() {
   const [formData, setFormData] = useState({ name: "", username: "" });
   const [isLoading, setIsLoading] = useState(true);
 
+  const BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     // Fetch the current account details to pre-fill the form
     const fetchAccountDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/accounts/${accountId}`);
+        const response = await axios.get(`${BASE_URL}/accounts/${accountId}`);
         const account = response.data.data;
         setFormData({ name: account.name, username: account.username });
         setIsLoading(false);
@@ -37,7 +39,7 @@ function UpdateAccount() {
     event.preventDefault();
 
     try {
-      await axios.put(`http://localhost:5001/accounts/${accountId}`, { data: formData });
+      await axios.put(`${BASE_URL}/accounts/${accountId}`, { data: formData });
       alert("Account updated successfully!");
       navigate(`/accounts/${accountId}`); // Redirect to the account details page
     } catch (error) {
