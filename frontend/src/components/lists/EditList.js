@@ -11,10 +11,12 @@ function EditList() {
   const [newShowName, setNewShowName] = useState(""); // New show name input
   const [isSaving, setIsSaving] = useState(false);
 
+  const BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     async function fetchListAndShows() {
       try {
-        const response = await axios.get(`http://localhost:5001/lists/${listId}`);
+        const response = await axios.get(`${BASE_URL}/lists/${listId}`);
         setTitle(response.data.data.title); // Pre-fill title
         setShows(response.data.data.shows || []); // Set associated shows
       } catch (err) {
@@ -28,7 +30,7 @@ function EditList() {
   const handleRemoveShow = async (showId) => {
     if (window.confirm("Are you sure you want to remove this show?")) {
       try {
-        await axios.delete(`http://localhost:5001/lists/${listId}/shows/${showId}`);
+        await axios.delete(`${BASE_URL}/lists/${listId}/shows/${showId}`);
         setShows((prevShows) => prevShows.filter((show) => show.id !== showId));
       } catch (err) {
         console.error("Error removing the show:", err);
