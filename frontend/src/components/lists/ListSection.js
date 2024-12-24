@@ -7,10 +7,12 @@ function ListSection() {
   const [lists, setLists] = useState([]);
   const navigate = useNavigate();
 
+  const BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     async function fetchLists() {
       try {
-        const response = await axios.get("http://localhost:5001/lists");
+        const response = await axios.get(`${BASE_URL}/lists`);
         setLists(response.data.data);
       } catch (error) {
         console.error("Error fetching lists:", error);
